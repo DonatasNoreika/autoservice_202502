@@ -53,6 +53,14 @@ class Order(models.Model):
 
     status = models.CharField(verbose_name="Būsena", max_length=1, choices=ORDER_STATUS, default="p")
 
+    def total_sum(self):
+        total = 0
+        lines = self.lines.all()
+        for line in lines:
+            total += line.service.price * line.quantity
+        return total
+
+    total_sum.short_description = "Bendra užsakymo suma"
 
     def __str__(self):
         return f"{self.car} ({self.date})"
@@ -63,7 +71,7 @@ class Order(models.Model):
 
 
 class OrderLine(models.Model):
-    order = models.ForeignKey(to="Order", verbose_name="Užsakymas", on_delete=models.CASCADE)
+    order = models.ForeignKey(to="Order", verbose_name="Užsakymas", on_delete=models.CASCADE, related_name="lines")
     service = models.ForeignKey(to="Service", verbose_name="Paslauga", on_delete=models.SET_NULL, null=True, blank=True)
     quantity = models.IntegerField(verbose_name="Kiekis")
 

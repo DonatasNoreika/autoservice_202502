@@ -18,8 +18,14 @@ class OrderLineInLine(admin.TabularInline):
 
 
 class OrderAdmin(admin.ModelAdmin):
-    list_display = ['car', 'date', 'status']
+    list_display = ['car', 'date', 'status', 'total_sum']
     inlines = [OrderLineInLine]
+
+    fieldsets = (
+        ('General', {'fields': ('date', 'car', 'status', 'total_sum')}),
+    )
+
+    readonly_fields = ['date', 'total_sum']
 
 class ServiceAdmin(admin.ModelAdmin):
     list_display = ['name', 'price']
