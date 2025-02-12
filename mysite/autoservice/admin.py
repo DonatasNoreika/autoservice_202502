@@ -8,8 +8,13 @@ from .models import (Service,
 class CarAdmin(admin.ModelAdmin):
     list_display = ['car_model', 'license_plate', 'vin_code', 'client_name']
 
+class OrderLineInLine(admin.TabularInline):
+    model = OrderLine
+    extra = 0
+
 class OrderAdmin(admin.ModelAdmin):
     list_display = ['car', 'date', 'status']
+    inlines = [OrderLineInLine]
 
 # Register your models here.
 admin.site.register(Service)
