@@ -13,6 +13,9 @@ class CarAdmin(admin.ModelAdmin):
 class OrderLineInLine(admin.TabularInline):
     model = OrderLine
     extra = 0
+    fields = ['service', 'quantity', 'line_sum']
+    readonly_fields = ['line_sum']
+
 
 class OrderAdmin(admin.ModelAdmin):
     list_display = ['car', 'date', 'status']
