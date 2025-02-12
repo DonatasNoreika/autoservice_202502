@@ -7,6 +7,7 @@ from .models import (Service,
 
 class CarAdmin(admin.ModelAdmin):
     list_display = ['car_model', 'license_plate', 'vin_code', 'client_name']
+    list_filter = ['car_model', 'client_name']
 
 class OrderLineInLine(admin.TabularInline):
     model = OrderLine
