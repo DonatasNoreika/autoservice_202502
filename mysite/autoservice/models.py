@@ -9,6 +9,10 @@ class Service(models.Model):
     def __str__(self):
         return self.name
 
+    class Meta:
+        verbose_name = "Paslauga"
+        verbose_name_plural = "Paslaugos"
+
 
 class CarModel(models.Model):
     make = models.CharField(verbose_name="Gamintojas", max_length=100)
@@ -16,6 +20,10 @@ class CarModel(models.Model):
 
     def __str__(self):
         return f"{self.make} {self.model}"
+
+    class Meta:
+        verbose_name = "Modelis"
+        verbose_name_plural = "Modeliai"
 
 
 class Car(models.Model):
@@ -28,6 +36,9 @@ class Car(models.Model):
     def __str__(self):
         return f"{self.car_model} - {self.license_plate}"
 
+    class Meta:
+        verbose_name = "Automobilis"
+        verbose_name_plural = "Automobiliai"
 
 class Order(models.Model):
     date = models.DateTimeField(verbose_name="Data", auto_now_add=True)
@@ -45,6 +56,10 @@ class Order(models.Model):
     def __str__(self):
         return f"{self.car} ({self.date})"
 
+    class Meta:
+        verbose_name = "Užsakymas"
+        verbose_name_plural = "Užsakymai"
+
 
 class OrderLine(models.Model):
     order = models.ForeignKey(to="Order", verbose_name="Užsakymas", on_delete=models.CASCADE)
@@ -53,3 +68,7 @@ class OrderLine(models.Model):
 
     def __str__(self):
         return f"{self.service} - {self.quantity} ({self.order})"
+
+    class Meta:
+        verbose_name = "Eilutė"
+        verbose_name_plural = "Eilutės"
