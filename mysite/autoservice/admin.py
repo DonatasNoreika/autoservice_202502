@@ -24,9 +24,13 @@ class OrderAdmin(admin.ModelAdmin):
 class ServiceAdmin(admin.ModelAdmin):
     list_display = ['name', 'price']
 
+
+class OrderLineAdmin(admin.ModelAdmin):
+    list_display = ['order', 'service', 'service__price', 'quantity', 'line_sum']
+
 # Register your models here.
 admin.site.register(Service, ServiceAdmin)
 admin.site.register(CarModel)
 admin.site.register(Car, CarAdmin)
 admin.site.register(Order, OrderAdmin)
-admin.site.register(OrderLine)
+admin.site.register(OrderLine, OrderLineAdmin)
