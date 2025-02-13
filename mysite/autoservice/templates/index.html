@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+
+{% block "title" %}HOME{% endblock %}
+
+
+{% block "content" %}
+<div class="display-5">Svetainės statistika:</div>
+<ul class="pt-2">
+    <li><strong>Paslaugų: {{ num_services }}</strong></li>
+    <li><strong>Atliktų taisymų: {{ num_orders_done }}</strong></li>
+    <li><strong>Registruotų automobilių: {{ num_cars }}</strong></li>
+</ul>
+{% endblock %}
