@@ -2,6 +2,7 @@ from django.shortcuts import render
 from .models import Service, Order, Car
 from django.views import generic
 
+
 # Create your views here.
 def index(request):
     num_services = Service.objects.all().count()
@@ -30,3 +31,8 @@ class OrderListView(generic.ListView):
     template_name = "orders.html"
     context_object_name = "orders"
 
+
+class OrderDetailView(generic.DetailView):
+    model = Order
+    template_name = "order.html"
+    context_object_name = "order"

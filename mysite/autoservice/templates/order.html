@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+
+{% block "title" %}Taisymas{% endblock %}
+
+
+{% block "content" %}
+<div class="display-5 pb-2">Taisymas</div>
+<ul class="pt-2">
+    <li><strong>Data:</strong> {{ order.date }}</li>
+    <li><strong>Būsena:</strong> {{ order.get_status_display }}</li>
+</ul>
+  <table class="table table-bordered">
+    <thead>
+      <tr>
+        <th>Paslauga</th>
+        <th>Kaina</th>
+        <th>Kiekis</th>
+        <th>Suma</th>
+      </tr>
+    </thead>
+    <tbody>
+    {% for line in order.lines.all %}
+      <tr>
+        <td>{{ line.service.name }}</td>
+        <td>{{ line.service.price }}</td>
+        <td>{{ line.quantity }}</td>
+        <td></td>
+      </tr>
+    {% endfor %}
+    </tbody>
+  </table>
+{% endblock %}
