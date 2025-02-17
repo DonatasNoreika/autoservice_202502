@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+
+{% block "title" %}Automobiliai{% endblock %}
+
+
+{% block "content" %}
+<div class="display-5 pb-2">Automobilis:</div>
+<ul class="pt-2">
+    <li><strong>Modelis:</strong> {{ car.car_model }}</li>
+    <li><strong>Valstybinis numeris:</strong> {{ car.license_plate }}</li>
+    <li><strong>VIN kodas:</strong> {{ car.vin_code }}</li>
+    <li><strong>Kliento vardas:</strong> {{ car.client_name }}</li>
+</ul>
+{% if car.orders.all %}
+<h4>Taisymai:</h4>
+{% for order in car.orders.all %}
+<p>{{ order.date }} - {{ order.get_status_display }}</p>
+{% endfor %}
+{% else %}
+<h4>Nėra taisymų</h4>
+{% endif %}
+{% endblock %}

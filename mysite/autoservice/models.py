@@ -42,7 +42,7 @@ class Car(models.Model):
 
 class Order(models.Model):
     date = models.DateTimeField(verbose_name="Data", auto_now_add=True)
-    car = models.ForeignKey(to="Car", verbose_name="Automobilis", on_delete=models.CASCADE)
+    car = models.ForeignKey(to="Car", verbose_name="Automobilis", on_delete=models.CASCADE, related_name="orders")
 
     ORDER_STATUS = (
         ('p', 'Administruojama'),

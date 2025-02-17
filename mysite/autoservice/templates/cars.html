@@ -6,6 +6,6 @@
 {% block "content" %}
 <div class="display-5 pb-2">Servise registruoti automobiliai:</div>
 {% for car in cars %}
-<p>{{ car }}</p>
+<a href="{% url 'car' car.pk %}"><p>{{ car }}</p></a>
 {% endfor %}
 {% endblock %}
