@@ -9,24 +9,28 @@
     <li><strong>Data:</strong> {{ order.date }}</li>
     <li><strong>Būsena:</strong> {{ order.get_status_display }}</li>
 </ul>
-  <table class="table table-bordered">
+<table class="table table-bordered">
     <thead>
-      <tr>
+    <tr>
         <th>Paslauga</th>
         <th>Kaina</th>
         <th>Kiekis</th>
         <th>Suma</th>
-      </tr>
+    </tr>
     </thead>
     <tbody>
     {% for line in order.lines.all %}
-      <tr>
+    <tr>
         <td>{{ line.service.name }}</td>
         <td>{{ line.service.price }}</td>
         <td>{{ line.quantity }}</td>
-        <td></td>
-      </tr>
+        <td>{{ line.line_sum }}</td>
+    </tr>
     {% endfor %}
+    <tr>
+        <td colspan="3"><b>BENDRA SUMA</b></td>
+        <td><b>{{ order.total_sum }}</b></td>
+    </tr>
     </tbody>
-  </table>
+</table>
 {% endblock %}
