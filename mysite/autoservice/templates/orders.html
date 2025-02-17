@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+
+{% block "title" %}Taisymai{% endblock %}
+
+
+{% block "content" %}
+<div class="display-5 pb-2">Taisymai:</div>
+{% for order in orders %}
+<a href=""><p>{{ order }}</p></a>
+{% endfor %}
+{% endblock %}
