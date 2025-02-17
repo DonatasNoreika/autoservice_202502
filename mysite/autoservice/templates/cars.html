@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+
+{% block "title" %}Automobiliai{% endblock %}
+
+
+{% block "content" %}
+<div class="display-5 pb-2">Servise registruoti automobiliai:</div>
+{% for car in cars %}
+<p>{{ car }}</p>
+{% endfor %}
+{% endblock %}
