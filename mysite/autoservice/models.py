@@ -32,6 +32,7 @@ class Car(models.Model):
     license_plate = models.CharField(verbose_name="Valstybinis numeris", max_length=10, unique=True)
     vin_code = models.CharField(verbose_name="VIN kodas", max_length=20)
     client_name = models.CharField(verbose_name="Klientas", max_length=100)
+    photo = models.ImageField('Nuotrauka', upload_to='cars', null=True, blank=True)
 
     def __str__(self):
         return f"{self.car_model} - {self.license_plate}"

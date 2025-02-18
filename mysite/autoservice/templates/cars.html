@@ -4,9 +4,24 @@
 
 
 {% block "content" %}
+{% load static %}
+
 <div class="display-5 pb-2">Servise registruoti automobiliai:</div>
 {% for car in cars %}
-<a href="{% url 'car' car.pk %}"><p>{{ car }}</p></a>
+<div class="col-md-4 d-flex align-items-stretch">
+    <div class="card mb-4 shadow-sm" style="width:300px">
+        {% if car.photo %}
+        <img class="card-img-top" src="{{ car.photo.url }}" alt="...">
+        {% else %}
+        <img class="card-img-top" src="{% static 'img/no-image.png' %}">
+        {% endif %}
+        <div class="card-body">
+            <h6 class="card-subtitle mb-2 text-muted">{{ car.car_model }}</h6>
+            <p class="card-text"><a href="{{ car.pk }}">{{ car.license_plate }}</a></p>
+        </div>
+    </div>
+</div>
+<!--<a href="{% url 'car' car.pk %}"><p>{{ car }}</p></a>-->
 {% endfor %}
 
 <div class="container puslapiai">

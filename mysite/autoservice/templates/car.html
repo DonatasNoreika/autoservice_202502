@@ -4,6 +4,9 @@
 
 
 {% block "content" %}
+{% if car.photo %}
+<img class="card-img-top" style="max-width: 40%" src="{{ car.photo.url }}">
+{% endif %}
 <div class="display-5 pb-2">Automobilis:</div>
 <ul class="pt-2">
     <li><strong>Modelis:</strong> {{ car.car_model }}</li>
