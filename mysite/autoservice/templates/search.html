@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+
+{% block "title" %}Paieškos rezultatai{% endblock %}
+
+
+{% block "content" %}
+<div class="display-5 pb-2">Paieškos {{ query }} rezultatai:</div>
+{% for car in cars %}
+<a href="{% url 'car' car.pk %}"><p>{{ car }}</p></a>
+{% endfor %}
+{% endblock %}
