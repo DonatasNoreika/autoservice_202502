@@ -13,6 +13,7 @@
     <li><strong>Valstybinis numeris:</strong> {{ car.license_plate }}</li>
     <li><strong>VIN kodas:</strong> {{ car.vin_code }}</li>
     <li><strong>Kliento vardas:</strong> {{ car.client_name }}</li>
+    <li><strong>Aprašymas:</strong> {{ car.description | safe }}</li>
 </ul>
 {% if car.orders.all %}
 <h4>Taisymai:</h4>
