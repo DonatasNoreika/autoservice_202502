@@ -59,10 +59,13 @@
                             {{ user.get_username }}
                         </a>
                     </li>
-                   <li class="nav-item">
+                    <li class="nav-item"><a class="nav-link" href="{% url 'user_orders' %}">Mano Taisymai</a></li>
+                    <li class="nav-item">
                         <form method="post" action="{% url 'logout' %}">
                             {% csrf_token %}
-                            <button class="nav-link" style="background: transparent; border: none; color: dark bg-dark;" type="submit">Atsijungti</button>
+                            <button class="nav-link" style="background: transparent; border: none; color: dark bg-dark;"
+                                    type="submit">Atsijungti
+                            </button>
                         </form>
                     </li>
                     {% else %}
