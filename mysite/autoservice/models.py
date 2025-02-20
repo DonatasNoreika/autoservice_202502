@@ -1,6 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
-
+from datetime import datetime
 
 # Create your models here.
 class Service(models.Model):
@@ -47,6 +47,13 @@ class Order(models.Model):
     car = models.ForeignKey(to="Car", verbose_name="Automobilis", on_delete=models.CASCADE, related_name="orders")
     client = models.ForeignKey(to=User, verbose_name="Klientas", on_delete=models.SET_NULL, null=True, blank=True)
     deadline = models.DateTimeField(verbose_name="Gražinimo terminas", null=True, blank=True)
+
+    def is_overdue(self):
+        if self.deadline and datetime.today() > self.deadline:
+            return True
+        return False
+
+    is_overdue.short_description = "Ar praėjo terminas?"
 
     ORDER_STATUS = (
         ('p', 'Administruojama'),

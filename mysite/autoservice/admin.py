@@ -18,7 +18,7 @@ class OrderLineInLine(admin.TabularInline):
 
 
 class OrderAdmin(admin.ModelAdmin):
-    list_display = ['client', 'car', 'date', 'deadline', 'status', 'total_sum']
+    list_display = ['client', 'car', 'date', 'deadline', 'status', 'total_sum', 'is_overdue']
     inlines = [OrderLineInLine]
 
     fieldsets = (
