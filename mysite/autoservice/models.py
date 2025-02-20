@@ -74,7 +74,7 @@ class Order(models.Model):
     total_sum.short_description = "Bendra užsakymo suma"
 
     def __str__(self):
-        return f"{self.car} ({self.date})"
+        return f"{self.car} ({self.deadline})"
 
     class Meta:
         verbose_name = "Užsakymas"

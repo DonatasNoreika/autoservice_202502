@@ -7,7 +7,7 @@
 <div class="display-5 pb-2">Taisymas</div>
 <ul class="pt-2">
     <li><strong>Data:</strong> {{ order.date }}</li>
-    <li><strong>Gražinimo terminas:</strong> {{ order.deadline }}</li>
+    <li><strong>Gražinimo terminas:</strong> <span class="{% if order.is_overdue %}text-danger{% endif %}">{{ order.deadline }}</span></li>
     <li><strong>Klientas:</strong> {{ order.client }}</li>
     <li><strong>Būsena:</strong> {{ order.get_status_display }}</li>
 </ul>
