@@ -46,6 +46,7 @@ class Order(models.Model):
     date = models.DateTimeField(verbose_name="Data", auto_now_add=True)
     car = models.ForeignKey(to="Car", verbose_name="Automobilis", on_delete=models.CASCADE, related_name="orders")
     client = models.ForeignKey(to=User, verbose_name="Klientas", on_delete=models.SET_NULL, null=True, blank=True)
+    deadline = models.DateTimeField(verbose_name="Gražinimo terminas", null=True, blank=True)
 
     ORDER_STATUS = (
         ('p', 'Administruojama'),
