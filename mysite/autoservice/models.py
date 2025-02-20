@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
 from datetime import datetime
+from tinymce.models import HTMLField
 
 # Create your models here.
 class Service(models.Model):
@@ -34,7 +35,7 @@ class Car(models.Model):
     vin_code = models.CharField(verbose_name="VIN kodas", max_length=20)
     client_name = models.CharField(verbose_name="Klientas", max_length=100)
     photo = models.ImageField('Nuotrauka', upload_to='cars', null=True, blank=True)
-    description = models.TextField(verbose_name="Aprašymas", max_length=5000, default="")
+    description = HTMLField(verbose_name="Aprašymas", max_length=5000, default="")
 
     def __str__(self):
         return f"{self.car_model} - {self.license_plate}"
