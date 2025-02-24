@@ -3,6 +3,7 @@ from django.contrib.auth.models import User
 from datetime import datetime
 from tinymce.models import HTMLField
 
+
 # Create your models here.
 class Service(models.Model):
     name = models.CharField(verbose_name="Pavadinimas", max_length=100)
@@ -44,6 +45,7 @@ class Car(models.Model):
         verbose_name = "Automobilis"
         verbose_name_plural = "Automobiliai"
 
+
 class Order(models.Model):
     date = models.DateTimeField(verbose_name="Data", auto_now_add=True)
     car = models.ForeignKey(to="Car", verbose_name="Automobilis", on_delete=models.CASCADE, related_name="orders")
@@ -79,8 +81,8 @@ class Order(models.Model):
         return f"{self.car} ({self.deadline})"
 
     class Meta:
-        verbose_name = "Užsakymas"
-        verbose_name_plural = "Užsakymai"
+        verbose_name = "Taisymas"
+        verbose_name_plural = "Taisymai"
 
 
 class OrderLine(models.Model):
@@ -99,3 +101,15 @@ class OrderLine(models.Model):
     class Meta:
         verbose_name = "Eilutė"
         verbose_name_plural = "Eilutės"
+
+
+class OrderComment(models.Model):
+    order = models.ForeignKey(to="Order", verbose_name="Taisymas", on_delete=models.SET_NULL, null=True, blank=True, related_name="comments")
+    author = models.ForeignKey(to=User, verbose_name="Komentatorius", on_delete=models.SET_NULL, null=True, blank=True)
+    date_created = models.DateTimeField(verbose_name="Data", auto_now_add=True)
+    content = models.TextField(verbose_name="Komentaras", max_length=2000)
+
+    class Meta:
+        verbose_name = "Komentaras"
+        verbose_name_plural = 'Komentarai'
+        ordering = ['-date_created']

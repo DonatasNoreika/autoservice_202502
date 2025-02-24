@@ -3,7 +3,8 @@ from .models import (Service,
                      CarModel,
                      Car,
                      Order,
-                     OrderLine)
+                     OrderLine,
+                     OrderComment)
 
 class CarAdmin(admin.ModelAdmin):
     list_display = ['car_model', 'license_plate', 'vin_code', 'client_name']
@@ -16,10 +17,13 @@ class OrderLineInLine(admin.TabularInline):
     fields = ['service', 'quantity', 'line_sum']
     readonly_fields = ['line_sum']
 
+class OrderCommentInLine(admin.TabularInline):
+    model = OrderComment
+    extra = 0
 
 class OrderAdmin(admin.ModelAdmin):
     list_display = ['client', 'car', 'date', 'deadline', 'status', 'total_sum', 'is_overdue']
-    inlines = [OrderLineInLine]
+    inlines = [OrderLineInLine, OrderCommentInLine]
 
     fieldsets = (
         ('General', {'fields': ('client', 'date', 'deadline', 'car', 'status', 'total_sum')}),
