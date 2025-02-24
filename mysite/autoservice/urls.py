@@ -3,6 +3,7 @@ from .views import (index,
                     cars,
                     car,
                     search,
+                    register,
                     OrderListView,
                     OrderDetailView,
                     UserOrderListView)
@@ -15,4 +16,5 @@ urlpatterns = [
     path("orders/<int:pk>", OrderDetailView.as_view(), name="order"),
     path("search/", search, name="search"),
     path("user_orders/", UserOrderListView.as_view(), name="user_orders"),
+    path('register/', register, name='register'),
 ]

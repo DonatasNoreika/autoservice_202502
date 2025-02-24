@@ -69,6 +69,7 @@
                         </form>
                     </li>
                     {% else %}
+                    <li class="nav-item"><a class="nav-link" href="{% url 'register'%}">Registruotis</a></li>
                     <li class="nav-item"><a class="nav-link" href="{% url 'login'%}">Prisijungti</a></li>
                     {% endif %}
                 </ul>
@@ -82,6 +83,14 @@
     <section class="py-5" id="features">
         <div class="container px-5 my-5">
             <div class="row gx-5">
+                {% if messages %}
+                {% for message in messages %}
+                <div class="alert alert-{% if message.tags == 'error' %}danger{% elif message.tags == 'info' %}success{% endif %}"
+                     role="alert">
+                    {{ message }}
+                </div>
+                {% endfor %}
+                {% endif %}
                 {% block "content" %}{% endblock %}
             </div>
         </div>
