@@ -2,7 +2,7 @@ from django.db import models
 from django.contrib.auth.models import User
 from datetime import datetime
 from tinymce.models import HTMLField
-
+from PIL import Image
 
 # Create your models here.
 
@@ -16,6 +16,25 @@ class Profile(models.Model):
     class Meta:
         verbose_name = "Profilis"
         verbose_name_plural = "Profiliai"
+
+    def save(self, *args, **kwargs):
+        super().save(*args, **kwargs)
+        img = Image.open(self.photo.path)
+
+        # Apkarpyti nuotrauką į kvadratą
+        if img.height != img.width:
+            min_dim = min(img.height, img.width)
+            left = (img.width - min_dim) / 2
+            top = (img.height - min_dim) / 2
+            right = (img.width + min_dim) / 2
+            bottom = (img.height + min_dim) / 2
+            img = img.crop((left, top, right, bottom))
+
+        # Sumažinti nuotraukos dydį
+        if img.height > 300 or img.width > 300:
+            output_size = (300, 300)
+            img.thumbnail(output_size)
+            img.save(self.photo.path)
 
 
 class Service(models.Model):
