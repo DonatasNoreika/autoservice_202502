@@ -10,8 +10,14 @@ from django.contrib import messages
 from django.contrib.auth import password_validation
 from .forms import OrderCommentForm
 from django.views.generic.edit import FormMixin
+from django.contrib.auth.decorators import login_required
 
 # Create your views here.
+
+@login_required
+def profile(request):
+    return render(request, 'profile.html')
+
 def index(request):
     num_services = Service.objects.all().count()
     num_orders_done = Order.objects.filter(status="i").count()
