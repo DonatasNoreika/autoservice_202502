@@ -4,7 +4,8 @@ from .models import (Service,
                      Car,
                      Order,
                      OrderLine,
-                     OrderComment)
+                     OrderComment,
+                     Profile)
 
 class CarAdmin(admin.ModelAdmin):
     list_display = ['car_model', 'license_plate', 'vin_code', 'client_name']
@@ -44,3 +45,4 @@ admin.site.register(CarModel)
 admin.site.register(Car, CarAdmin)
 admin.site.register(Order, OrderAdmin)
 admin.site.register(OrderLine, OrderLineAdmin)
+admin.site.register(Profile)

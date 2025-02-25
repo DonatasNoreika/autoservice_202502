@@ -5,6 +5,19 @@ from tinymce.models import HTMLField
 
 
 # Create your models here.
+
+class Profile(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    photo = models.ImageField(default="profile_pics/default.png", upload_to="profile_pics")
+
+    def __str__(self):
+        return f"{self.user.username} profilis"
+
+    class Meta:
+        verbose_name = "Profilis"
+        verbose_name_plural = "Profiliai"
+
+
 class Service(models.Model):
     name = models.CharField(verbose_name="Pavadinimas", max_length=100)
     price = models.FloatField(verbose_name="Kaina")
@@ -104,7 +117,8 @@ class OrderLine(models.Model):
 
 
 class OrderComment(models.Model):
-    order = models.ForeignKey(to="Order", verbose_name="Taisymas", on_delete=models.SET_NULL, null=True, blank=True, related_name="comments")
+    order = models.ForeignKey(to="Order", verbose_name="Taisymas", on_delete=models.SET_NULL, null=True, blank=True,
+                              related_name="comments")
     author = models.ForeignKey(to=User, verbose_name="Komentatorius", on_delete=models.SET_NULL, null=True, blank=True)
     date_created = models.DateTimeField(verbose_name="Data", auto_now_add=True)
     content = models.TextField(verbose_name="Komentaras", max_length=2000)
