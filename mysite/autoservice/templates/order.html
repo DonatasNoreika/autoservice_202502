@@ -6,9 +6,12 @@
 {% block "content" %}
 <div class="display-5 pb-2">Taisymas</div>
 <ul class="pt-2">
+    <li>
+        <strong>Klientas:</strong> {{ order.client }}
+        <img class="rounded-circle account-img" style="width: 30px" src="{{ order.client.profile.photo.url }}">
+    </li>
     <li><strong>Data:</strong> {{ order.date }}</li>
     <li><strong>Gražinimo terminas:</strong> <span class="{% if order.is_overdue %}text-danger{% endif %}">{{ order.deadline }}</span></li>
-    <li><strong>Klientas:</strong> {{ order.client }}</li>
     <li><strong>Automobilis:</strong> {{ order.car }}</li>
     <li><strong>Būsena:</strong> {{ order.get_status_display }}</li>
 </ul>
@@ -50,7 +53,10 @@
 {% if order.comments.all %}
 <h4>Komentarai:</h4>
 {% for comment in order.comments.all %}
-<p><strong>{{ comment.author }}</strong>, <em>{{ comment.date_created }}</em></p>
+<p>
+    <img class="rounded-circle account-img" style="width: 30px" src="{{ comment.author.profile.photo.url }}">
+    <strong>{{ comment.author }}</strong>, <em>{{ comment.date_created }}</em>
+</p>
 <p>{{ comment.content }}</p>
 <hr>
 {% endfor %}
