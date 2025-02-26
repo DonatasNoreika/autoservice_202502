@@ -10,7 +10,7 @@ from django.contrib import messages
 from django.contrib.auth import password_validation
 from django.views.generic.edit import FormMixin
 from django.contrib.auth.decorators import login_required
-from .forms import OrderCommentForm, UserUpdateForm, ProfileUpdateForm
+from .forms import OrderCommentForm, UserUpdateForm, ProfileUpdateForm, OrderCreateUpdateForm
 
 
 # Create your views here.
@@ -162,9 +162,10 @@ def register(request):
 
 class OrderCreateView(LoginRequiredMixin, generic.CreateView):
     model = Order
-    fields = ['car', 'deadline']
     template_name = 'order_form.html'
     success_url = "/autoservice/user_orders/"
+    form_class = OrderCreateUpdateForm
+    # fields = ['car', 'deadline']
 
     def form_valid(self, form):
         form.instance.client = self.request.user
@@ -173,9 +174,10 @@ class OrderCreateView(LoginRequiredMixin, generic.CreateView):
 
 class OrderUpdateView(LoginRequiredMixin, UserPassesTestMixin, generic.UpdateView):
     model = Order
-    fields = ['car', 'deadline']
     template_name = 'order_form.html'
     success_url = "/autoservice/user_orders/"
+    form_class = OrderCreateUpdateForm
+    # fields = ['car', 'deadline']
 
     def test_func(self):
         return self.get_object().client == self.request.user
