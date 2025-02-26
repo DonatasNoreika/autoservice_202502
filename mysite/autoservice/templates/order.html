@@ -31,6 +31,9 @@
         <th>Kaina</th>
         <th>Kiekis</th>
         <th>Suma</th>
+        {% if order.client == user %}
+        <th></th>
+        {% endif %}
     </tr>
     </thead>
     <tbody>
@@ -40,6 +43,14 @@
         <td>{{ line.service.price }}</td>
         <td>{{ line.quantity }}</td>
         <td>{{ line.line_sum }}</td>
+        {% if order.client == user %}
+        <td>
+            <div>
+                <a class="btn btn-secondary btn-sm mt-1 mb-1" href="{% url 'orderline_update' line.pk %}">Redaguoti</a>
+                <a class="btn btn-danger btn-sm mt-1 mb-1" href="{% url 'orderline_delete' line.pk %}">Ištrinti</a>
+            </div>
+        </td>
+        {% endif %}
     </tr>
     {% endfor %}
     <tr>
