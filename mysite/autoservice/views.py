@@ -183,3 +183,15 @@ class OrderUpdateView(LoginRequiredMixin, UserPassesTestMixin, generic.UpdateVie
     def form_valid(self, form):
         form.instance.client = self.request.user
         return super().form_valid(form)
+
+
+class OrderDeleteView(LoginRequiredMixin, UserPassesTestMixin, generic.DeleteView):
+    model = Order
+    template_name = 'order_delete.html'
+    success_url = "/autoservice/user_orders/"
+    context_object_name = "order"
+
+    def test_func(self):
+        return self.get_object().client == self.request.user
+
+
