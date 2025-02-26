@@ -115,6 +115,7 @@ class Order(models.Model):
     class Meta:
         verbose_name = "Taisymas"
         verbose_name_plural = "Taisymai"
+        ordering = ['-id']
 
 
 class OrderLine(models.Model):

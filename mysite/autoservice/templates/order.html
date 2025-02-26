@@ -14,6 +14,11 @@
     <li><strong>Gražinimo terminas:</strong> <span class="{% if order.is_overdue %}text-danger{% endif %}">{{ order.deadline }}</span></li>
     <li><strong>Automobilis:</strong> {{ order.car }}</li>
     <li><strong>Būsena:</strong> {{ order.get_status_display }}</li>
+    {% if order.client == user %}
+    <div>
+        <a class="btn btn-secondary btn-sm mt-1 mb-1" href="{% url 'orders_update' order.pk %}">Redaguoti</a>
+    </div>
+    {% endif %}
 </ul>
 <table class="table table-bordered">
     <thead>
