@@ -4,6 +4,9 @@
 
 
 {% block "content" %}
+<div>
+    <a class="btn btn-secondary btn-sm mt-1 mb-1" href="{% url 'orders_new' %}">Naujas taisymas</a>
+</div>
 <div class="display-5 pb-2">Mano Taisymai:</div>
 {% for order in orders %}
 <a href="{% url 'order' order.pk %}">

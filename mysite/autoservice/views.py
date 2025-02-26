@@ -12,6 +12,7 @@ from django.views.generic.edit import FormMixin
 from django.contrib.auth.decorators import login_required
 from .forms import OrderCommentForm, UserUpdateForm, ProfileUpdateForm
 
+
 # Create your views here.
 
 @login_required
@@ -32,7 +33,6 @@ def profile(request):
             messages.info(request, f"Profilis atnaujintas")
             return redirect('profile')
 
-
     u_form = UserUpdateForm(instance=request.user)
     p_form = ProfileUpdateForm(instance=request.user.profile)
     context = {
@@ -40,6 +40,7 @@ def profile(request):
         'p_form': p_form,
     }
     return render(request, "profile.html", context=context)
+
 
 def index(request):
     num_services = Service.objects.all().count()
@@ -121,6 +122,7 @@ class UserOrderListView(LoginRequiredMixin, generic.ListView):
     def get_queryset(self):
         return Order.objects.filter(client=self.request.user)
 
+
 @csrf_protect
 def register(request):
     if request.method == "POST":
@@ -156,3 +158,15 @@ def register(request):
             messages.error(request, 'Slaptažodžiai nesutampa!')
             return redirect('register')
     return render(request, 'register.html')
+
+
+class OrderCreateView(LoginRequiredMixin, generic.CreateView):
+    model = Order
+    fields = ['car', 'deadline']
+    template_name = 'order_form.html'
+    success_url = "/autoservice/user_orders/"
+
+    def form_valid(self, form):
+        form.instance.client = self.request.user
+        return super().form_valid(form)
+
