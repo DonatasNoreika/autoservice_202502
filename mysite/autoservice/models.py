@@ -121,7 +121,7 @@ class Order(models.Model):
 class OrderLine(models.Model):
     order = models.ForeignKey(to="Order", verbose_name="Užsakymas", on_delete=models.CASCADE, related_name="lines")
     service = models.ForeignKey(to="Service", verbose_name="Paslauga", on_delete=models.SET_NULL, null=True, blank=True)
-    quantity = models.IntegerField(verbose_name="Kiekis")
+    quantity = models.IntegerField(verbose_name="Kiekis", default=1)
 
     def line_sum(self):
         return self.service.price * self.quantity
